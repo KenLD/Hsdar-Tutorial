@@ -39,6 +39,30 @@ mapview(raster[[4]], na.color = "transparent", map.types = "Esri.WorldImagery")
 
 #-----------Transforming the Rasterclass so hsdar can use it------------
 
-#apply the wavelength from the metadata?????
-wavelength <- c(404.08,
+#apply the wavelengthborders from the metadata ????
+#Vector with corresponding wavelength for each band. 
+#A matrix or data.frame may be passed giving the upper and lower limit 
+#of each band. In this case, the first column is used as lower band 
+#limit and the second as upper limit, respectively.
 
+wavelength <- matrix(c(440, 520, 630, 690, 760, 510, 590, 685, 730, 850), nrow = 2, ncol = 5, byrow = TRUE)
+wavelength
+
+#optional hyperspecs for performance
+#hyperspecs <- hsdar::HyperSpecRaster(raster, wavelength)
+#class(hyperspecs)
+
+#speclip for further steps
+speclib <- hsdar::speclib(raster, wavelength)
+class(speclib)
+
+
+#-------------------- Vegetation Indices --------------------
+
+#required packages
+devtools::install_github("pat-s/rasterFunctions")
+
+#NDVI Calculation Option 1
+time <- Sys.time()
+range <- 70
+ndvi_speclib <- vegindex(speclib, index = "NDVI3")
