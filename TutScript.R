@@ -39,7 +39,7 @@ mapview(raster[[4]], na.color = "transparent", map.types = "Esri.WorldImagery")
 
 #-----------Transforming the Rasterclass so hsdar can use it------------
 
-#apply the wavelengthborders from the metadata ????
+#apply the wavelengthborders from the metadata
 #Vector with corresponding wavelength for each band. 
 #A matrix or data.frame may be passed giving the upper and lower limit 
 #of each band. In this case, the first column is used as lower band 
